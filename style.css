@@ -1,0 +1,289 @@
+/*
+ * Global stylesheet for the updated Jacobs Theology Show website.
+ *
+ * This stylesheet defines a modern, responsive layout built around a warm
+ * colour palette and clean typography. Sections and cards are used to
+ * organise content consistently across pages. The design adapts to
+ * different screen sizes using CSS grid and media queries.
+ */
+
+:root {
+  /* Primary brand colours */
+  --primary-colour: #e8436f;
+  --secondary-colour: #f4a5c3;
+  --light-bg: #fff7f2;
+  --dark-text: #3a3a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--dark-text);
+  background: linear-gradient(180deg, #fff7f2 0%, #fde7e2 100%);
+
+  /* Custom cursor: use the cartoon cat face for the mouse pointer across the whole site.  The fallback "auto" ensures a default cursor if the image cannot be loaded. */
+  cursor: url('images/cat_cursor.png'), auto;
+}
+
+/* Navigation bar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--primary-colour);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav .title {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Hero section with background image */
+.hero {
+  position: relative;
+  /* Increase the hero height so the banner image isn't awkwardly cropped on wider screens */
+  height: 60vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Use the provided banner image as the hero background. Center the image to avoid cutting off important details. */
+  background: url('images/banner.png') center/cover no-repeat;
+  filter: brightness(0.7);
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin: 0;
+  z-index: 1;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  z-index: 1;
+  max-width: 600px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background: var(--secondary-colour);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #c92e58;
+}
+
+/* Generic section wrapper */
+.section {
+  padding: 3rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section p {
+  margin-bottom: 1.5rem;
+}
+
+/* Card grid layout */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 600px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Generic card */
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  flex: 1;
+  color: #555555;
+}
+
+/* Footer */
+footer {
+  background: var(--primary-colour);
+  color: #ffffff;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+footer a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Larger text for the About the Show section on the home page
+ * To improve readability, the about-text class bumps up the
+ * font size and line height on small screens and scales even
+ * larger on medium and large screens.  Using a single block
+ * definition and a media query avoids duplicate rules. */
+.about-text {
+  font-size: 1.25rem;
+  line-height: 1.8;
+}
+
+@media (min-width: 768px) {
+  .about-text {
+    font-size: 1.6rem;
+  }
+}
+/* Simple mobile layout fix */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  /* Fix for hero banner image on mobile */
+@media (max-width: 600px) {
+  .hero {
+    height: 40vh;
+    min-height: 200px;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .hero::before {
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+
+  .section {
+    padding: 1.5rem 1rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .card p {
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+/* Show a different banner image on mobile */
+@media (max-width: 600px) {
+  .hero::before {
+    background-image: url('images/cat podcast.png') !important;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
